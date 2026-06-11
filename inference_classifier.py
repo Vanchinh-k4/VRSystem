@@ -18,9 +18,9 @@ app = Flask(__name__)
 try:
     ser = serial.Serial('/dev/serial0', 115200, timeout=1)
     time.sleep(2)
-    print("✅ Kết nối UART /dev/serial0 thành công.")
+    print(" Kết nối UART /dev/serial0 thành công.")
 except Exception as e:
-    print(f"⚠️ Không thể kết nối UART: {e}. Chạy chế độ không có robot.")
+    print(f" Không thể kết nối UART: {e}. Chạy chế độ không có robot.")
     ser = None
 
 # ======================================================
@@ -31,9 +31,9 @@ MODEL_PATH = os.path.join(BASE_DIR, 'model.p')
 try:
     model_dict = pickle.load(open(MODEL_PATH, 'rb'))
     model = model_dict['model']
-    print("✅ Đã tải file Model AI thành công.")
+    print(" Đã tải file Model AI thành công.")
 except Exception as e:
-    print(f"❌ LỖI KHÔNG TẢI ĐƯỢC MODEL: {e}")
+    print(f" LỖI KHÔNG TẢI ĐƯỢC MODEL: {e}")
     sys.exit(1)
 
 # ======================================================
@@ -148,17 +148,17 @@ def video_capture_thread():
         if cap.isOpened():
             ret, test_frame = cap.read()
             if ret:
-                print(f"🎉 XÁC NHẬN: Camera hoạt động tốt tại cổng /dev/video{port}!")
+                print(f" XÁC NHẬN: Camera hoạt động tốt tại cổng /dev/video{port}!")
                 camera_opened = True
                 break
             else:
-                print(f"⚠️ Cổng /dev/video{port} mở được nhưng không xuất được hình.")
+                print(f" Cổng /dev/video{port} mở được nhưng không xuất được hình.")
                 cap.release()
         else:
             cap.release()
 
     if not camera_opened:
-        print("❌ THẤT BẠI: Không tìm thấy camera nào khả dụng. Hãy kiểm tra lại cáp nối!")
+        print(" THẤT BẠI: Không tìm thấy camera nào khả dụng. Hãy kiểm tra lại cáp nối!")
         return
 
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
